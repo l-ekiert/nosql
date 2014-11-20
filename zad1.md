@@ -127,6 +127,7 @@ var Warszawa = db.places.findOne({ _id: "Warszawa" })
 db.places.find({loc: {$near: {$geometry: Warszawa.loc, $maxDistance: 600000}}}).skip(1).limit(1)
 ```
 [Wynik](https://github.com/lekiert/nosql/blob/master/zapytania/z1.json)
+[GeoJSON](https://github.com/lekiert/nosql/blob/master/zapytania/z1.geojson)
 
 ### Zapytanie 2:
 Miasta wojewodzkie znajdujace sie w promieniu 2 stopni (ok. 222.4 km) od Lodzi:
@@ -135,6 +136,7 @@ var Lodz = db.places.findOne({ _id: "Lodz" })
 db.places.find({loc: {$geoWithin: {$center: [Lodz.loc.coordinates, 2]}}})
 ```
 [Wynik](https://github.com/lekiert/nosql/blob/master/zapytania/z2.json)
+[GeoJSON](https://github.com/lekiert/nosql/blob/master/zapytania/z2.geojson)
 
 ### Zapytanie 3:
 Miasta znajdujące się w czworokącie o wierzchołkach polozonych w najdalej wysunietych punktach Polski (S, E, N, W)
@@ -142,6 +144,7 @@ Miasta znajdujące się w czworokącie o wierzchołkach polozonych w najdalej wy
 db.places.find({loc: {$geoWithin: {$geometry: polygon}}})
 ```
 [Wynik](https://github.com/lekiert/nosql/blob/master/zapytania/z3.json)
+[GeoJSON](https://github.com/lekiert/nosql/blob/master/zapytania/z3.geojson)
 
 ### Zapytanie 4:
 Miasta lezace na tym samym rownolezniku, co Gdansk:
@@ -149,6 +152,7 @@ Miasta lezace na tym samym rownolezniku, co Gdansk:
 db.places.find({loc: {$geoIntersects: {$geometry: {type: "LineString", coordinates: [[180,Gdansk.loc.coordinates[1]],[-180,Gdansk.loc.coordinates[1]]]}}}})
 ```
 [Wynik](https://github.com/lekiert/nosql/blob/master/zapytania/z4.json)
+[GeoJSON](https://github.com/lekiert/nosql/blob/master/zapytania/z4.geojson)
 
 ### Zapytanie 5:
 Miasta lezace na linii Gdansk-Opole:
@@ -158,6 +162,7 @@ var Opole = db.places.findOne({ _id: "Opole" })
 db.places.find({loc: {$geoIntersects: {$geometry: {"type": "LineString", "coordinates": [Gdansk.loc.coordinates,Opole.loc.coordinates]}}}})
 ```
 [Wynik](https://github.com/lekiert/nosql/blob/master/zapytania/z5.json)
+[GeoJSON](https://github.com/lekiert/nosql/blob/master/zapytania/z5.geojson)
 
 ### Zapytanie 6:
 Miasta znajdujace sie w tzw. Polsce "B":
@@ -182,3 +187,4 @@ var polygon = {
 db.places.find({loc: {$geoWithin: {$geometry: polygon}}})
 ```
 [Wynik](https://github.com/lekiert/nosql/blob/master/zapytania/z6.json)
+[GeoJSON](https://github.com/lekiert/nosql/blob/master/zapytania/z6.geojson)
