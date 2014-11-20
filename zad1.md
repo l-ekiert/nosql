@@ -126,10 +126,7 @@ Miasto wojewodzkie polozone najblizej Warszawy:
 var Warszawa = db.places.findOne({ _id: "Warszawa" })
 db.places.find({loc: {$near: {$geometry: Warszawa.loc, $maxDistance: 600000}}}).skip(1).limit(1)
 ```
-Wynik:
-```
-{ "_id" : "Lodz", "loc" : { "type" : "Point", "coordinates" : [ 19.45919, 51.764374 ] } }
-```
+[Wynik](https://github.com/lekiert/nosql/blob/master/zapytania/z1.json)
 
 ### Zapytanie 2:
 Miasta wojewodzkie znajdujace sie w promieniu 2 stopni (ok. 222.4 km) od Lodzi:
@@ -137,45 +134,21 @@ Miasta wojewodzkie znajdujace sie w promieniu 2 stopni (ok. 222.4 km) od Lodzi:
 var Lodz = db.places.findOne({ _id: "Lodz" })
 db.places.find({loc: {$geoWithin: {$center: [Lodz.loc.coordinates, 2]}}})
 ```
-Wynik:
-```
-{ "_id" : "Torun", "loc" : { "type" : "Point", "coordinates" : [ 18.613415, 53.018262 ] } }
-{ "_id" : "Katowice", "loc" : { "type" : "Point", "coordinates" : [ 19.021797, 50.256795 ] } }
-{ "_id" : "Opole", "loc" : { "type" : "Point", "coordinates" : [ 17.925911, 50.66898 ] } }
-{ "_id" : "Krakow", "loc" : { "type" : "Point", "coordinates" : [ 19.94276, 50.053357 ] } }
-{ "_id" : "Lodz", "loc" : { "type" : "Point", "coordinates" : [ 19.45919, 51.764374 ] } }
-{ "_id" : "Kielce", "loc" : { "type" : "Point", "coordinates" : [ 20.630264, 50.875176 ] } }
-{ "_id" : "Warszawa", "loc" : { "type" : "Point", "coordinates" : [ 21.003284, 52.230921 ] } }
-
-```
+[Wynik](https://github.com/lekiert/nosql/blob/master/zapytania/z2.json)
 
 ### Zapytanie 3:
 Miasta znajdujące się w czworokącie o wierzchołkach polozonych w najdalej wysunietych punktach Polski (S, E, N, W)
 ```
 db.places.find({loc: {$geoWithin: {$geometry: polygon}}})
 ```
-Wynik:
-```
-{ "_id" : "Gdansk", "loc" : { "type" : "Point", "coordinates" : [ 18.629379, 54.35403 ] } }
-{ "_id" : "Torun", "loc" : { "type" : "Point", "coordinates" : [ 18.613415, 53.018262 ] } }
-{ "_id" : "Poznan", "loc" : { "type" : "Point", "coordinates" : [ 16.926842, 52.408637 ] } }
-{ "_id" : "Gorzow Wielkopolski", "loc" : { "type" : "Point", "coordinates" : [ 15.240612, 52.732101 ] } }
-{ "_id" : "Kielce", "loc" : { "type" : "Point", "coordinates" : [ 20.630264, 50.875176 ] } }
-{ "_id" : "Lodz", "loc" : { "type" : "Point", "coordinates" : [ 19.45919, 51.764374 ] } }
-{ "_id" : "Warszawa", "loc" : { "type" : "Point", "coordinates" : [ 21.003284, 52.230921 ] } }
-{ "_id" : "Lublin", "loc" : { "type" : "Point", "coordinates" : [ 22.574501, 51.239929 ] } }
-{ "_id" : "Rzeszow", "loc" : { "type" : "Point", "coordinates" : [ 21.997719, 50.034582 ] } }
-```
+[Wynik](https://github.com/lekiert/nosql/blob/master/zapytania/z3.json)
 
 ### Zapytanie 4:
 Miasta lezace na tym samym rownolezniku, co Gdansk:
 ```
 db.places.find({loc: {$geoIntersects: {$geometry: {type: "LineString", coordinates: [[180,Gdansk.loc.coordinates[1]],[-180,Gdansk.loc.coordinates[1]]]}}}})
 ```
-Wyniki:
-```
-{ "_id" : "Gdansk", "loc" : { "type" : "Point", "coordinates" : [ 18.629379, 54.35403 ] } }
-```
+[Wynik](https://github.com/lekiert/nosql/blob/master/zapytania/z4.json)
 
 ### Zapytanie 5:
 Miasta lezace na linii Gdansk-Opole:
@@ -184,11 +157,7 @@ var Gdansk = db.places.findOne({ _id: "Gdansk" })
 var Opole = db.places.findOne({ _id: "Opole" })
 db.places.find({loc: {$geoIntersects: {$geometry: {"type": "LineString", "coordinates": [Gdansk.loc.coordinates,Opole.loc.coordinates]}}}})
 ```
-Wyniki:
-```
-{ "_id" : "Gdansk", "loc" : { "type" : "Point", "coordinates" : [ 18.629379, 54.35403 ] } }
-{ "_id" : "Opole", "loc" : { "type" : "Point", "coordinates" : [ 17.925911, 50.66898 ] } }
-```
+[Wynik](https://github.com/lekiert/nosql/blob/master/zapytania/z5.json)
 
 ### Zapytanie 6:
 Miasta znajdujace sie w tzw. Polsce "B":
@@ -212,16 +181,4 @@ var polygon = {
 }
 db.places.find({loc: {$geoWithin: {$geometry: polygon}}})
 ```
-Wyniki:
-```
-{ "_id" : "Olsztyn", "loc" : { "type" : "Point", "coordinates" : [ 20.478344, 53.776483 ] } }
-{ "_id" : "Torun", "loc" : { "type" : "Point", "coordinates" : [ 18.613415, 53.018262 ] } }
-{ "_id" : "Krakow", "loc" : { "type" : "Point", "coordinates" : [ 19.94276, 50.053357 ] } }
-{ "_id" : "Katowice", "loc" : { "type" : "Point", "coordinates" : [ 19.021797, 50.256795 ] } }
-{ "_id" : "Kielce", "loc" : { "type" : "Point", "coordinates" : [ 20.630264, 50.875176 ] } }
-{ "_id" : "Lodz", "loc" : { "type" : "Point", "coordinates" : [ 19.45919, 51.764374 ] } }
-{ "_id" : "Warszawa", "loc" : { "type" : "Point", "coordinates" : [ 21.003284, 52.230921 ] } }
-{ "_id" : "Bialystok", "loc" : { "type" : "Point", "coordinates" : [ 23.140125, 53.134588 ] } }
-{ "_id" : "Lublin", "loc" : { "type" : "Point", "coordinates" : [ 22.574501, 51.239929 ] } }
-{ "_id" : "Rzeszow", "loc" : { "type" : "Point", "coordinates" : [ 21.997719, 50.034582 ] } }
-```
+[Wynik](https://github.com/lekiert/nosql/blob/master/zapytania/z6.json)
