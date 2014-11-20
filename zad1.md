@@ -1,7 +1,7 @@
 # Zadanie 1
 
 ## a)
-Wstepne przygotowanie danych przy uzyciu skryptu bash 2unix.sh. Import danych do kolekcji 'train' w bazie 'zadanie'.
+Wstępne przygotowanie danych przy użyciu skryptu bash 2unix.sh. Import danych do kolekcji 'train' w bazie 'zadanie'.
 ```
 time ./mongoimport.exe -d zadanie -c train --type csv --file d:/nosql/data.csv --headerline
 ```
@@ -14,6 +14,18 @@ user    0m0.000s
 sys     0m0.015s
 ```
 
+W przypadku Postgresa:
+
+tabela:
+```sql
+CREATE TABLE trains(
+	id INT PRIMARY KEY NOT NULL,
+	title CHAR(128) NOT NULL,
+	body CHAR(128) NOT NULL,
+	tags CHAR(128) NOT NULL
+)
+```
+
 ## b)
 
 ```
@@ -22,7 +34,7 @@ db.train.count()
 ```
 
 ## c)
-Skrypt zamieniajacy stringa z tagami (ze spacja jako separatorem) na tablice stringow:
+Skrypt zamieniający stringa z tagami (ze spacją jako separatorem) na tablicę stringów:
 ```javascript
 var db = new Mongo().getDB('zadanie');
 var records = db.train.find();
@@ -45,7 +57,7 @@ user    0m0.000s
 sys     0m0.015s
 ```
 ---
-Ilosc tagow
+Ilosc tagów
 ```javascript
 var db = new Mongo().getDB('zadanie');
 var records = db.train.find();
@@ -69,7 +81,7 @@ user    0m0.000s
 sys     0m0.015s
 ```
 
-Ilosc unikalnych tagow
+Ilosc unikalnych tagów
 ```javascript
 var db = new Mongo().getDB('zadanie');
 var records = db.train.find();
@@ -103,7 +115,7 @@ sys     0m0.000s
 
 ## d)
 
-Import pliku JSON zawierajacego polozenia miast wojewodzkich w Polsce:
+Import pliku JSON zawierającego położenia miast wojewódzkich w Polsce:
 ```
 $ time ./mongoimport.exe -c places --file D:/nosql/miasta.json --type json
 connected to: 127.0.0.1
@@ -121,7 +133,7 @@ db.places.ensureIndex({"loc" : "2dsphere"})
 ```
 
 ### Zapytanie 1:
-Miasto wojewodzkie polozone najblizej Warszawy:
+Miasto wojewódzkie położone najbliżej Warszawy:
 ```javascript
 var Warszawa = db.places.findOne({ _id: "Warszawa" })
 db.places.find({loc: {$near: {$geometry: Warszawa.loc, $maxDistance: 600000}}}).skip(1).limit(1)
@@ -130,7 +142,7 @@ db.places.find({loc: {$near: {$geometry: Warszawa.loc, $maxDistance: 600000}}}).
 [GeoJSON](https://github.com/lekiert/nosql/blob/master/zapytania/z1.geojson)
 
 ### Zapytanie 2:
-Miasta wojewodzkie znajdujace sie w promieniu 2 stopni (ok. 222.4 km) od Lodzi:
+Miasta wojewódzkie znajdujące się max 2 stopnie (ok. 222.4 km) od Łodzi:
 ```javascript
 var Lodz = db.places.findOne({ _id: "Lodz" })
 db.places.find({loc: {$geoWithin: {$center: [Lodz.loc.coordinates, 2]}}})
@@ -139,7 +151,7 @@ db.places.find({loc: {$geoWithin: {$center: [Lodz.loc.coordinates, 2]}}})
 [GeoJSON](https://github.com/lekiert/nosql/blob/master/zapytania/z2.geojson)
 
 ### Zapytanie 3:
-Miasta znajdujące się w czworokącie o wierzchołkach polozonych w najdalej wysunietych punktach Polski (S, E, N, W)
+Miasta znajdujące się w czworokącie o wierzchołkach położonych w najdalej wysuniętych punktach Polski (S, E, N, W)
 ```javascript
 db.places.find({loc: {$geoWithin: {$geometry: polygon}}})
 ```
@@ -147,7 +159,7 @@ db.places.find({loc: {$geoWithin: {$geometry: polygon}}})
 [GeoJSON](https://github.com/lekiert/nosql/blob/master/zapytania/z3.geojson)
 
 ### Zapytanie 4:
-Miasta lezace na tym samym rownolezniku, co Gdansk:
+Miasta leżące na tym samym równoleżniku, co Gdaśsk:
 ```javascript
 db.places.find({loc: {$geoIntersects: {$geometry: {type: "LineString", coordinates: [[180,Gdansk.loc.coordinates[1]],[-180,Gdansk.loc.coordinates[1]]]}}}})
 ```
@@ -155,7 +167,7 @@ db.places.find({loc: {$geoIntersects: {$geometry: {type: "LineString", coordinat
 [GeoJSON](https://github.com/lekiert/nosql/blob/master/zapytania/z4.geojson)
 
 ### Zapytanie 5:
-Miasta lezace na linii Gdansk-Opole:
+Miasta leżące na linii Gdańsk-Opole:
 ```javascript
 var Gdansk = db.places.findOne({ _id: "Gdansk" })
 var Opole = db.places.findOne({ _id: "Opole" })
@@ -165,7 +177,7 @@ db.places.find({loc: {$geoIntersects: {$geometry: {"type": "LineString", "coordi
 [GeoJSON](https://github.com/lekiert/nosql/blob/master/zapytania/z5.geojson)
 
 ### Zapytanie 6:
-Miasta znajdujace sie w tzw. Polsce "B":
+Miasta znajdujące sie w tzw. Polsce "B":
 ```javascript
 var polygon = {
   "type": "Polygon",
