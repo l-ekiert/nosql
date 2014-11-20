@@ -20,11 +20,24 @@ tabela:
 ```sql
 CREATE TABLE trains(
 	id INT PRIMARY KEY NOT NULL,
-	title CHAR(128) NOT NULL,
-	body CHAR(128) NOT NULL,
-	tags CHAR(128) NOT NULL
+	title TEXT NOT NULL,
+	body TEXT NOT NULL,
+	tags TEXT NOT NULL
 )
 ```
+
+import:
+```
+COPY trains FROM 'd:/data.csv' WITH DELIMITER ',' CSV HEADER
+```
+
+czas wykonania:
+```
+409369 ms
+409,369/60 = ok. 6,82
+```
+
+Na moim komputerze Postgres załadował się dużo szybciej.
 
 ## b)
 
