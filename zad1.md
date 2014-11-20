@@ -23,7 +23,7 @@ db.train.count()
 
 ## c)
 Skrypt zamieniajacy stringa z tagami (ze spacja jako separatorem) na tablice stringow:
-```
+```javascript
 var db = new Mongo().getDB('zadanie');
 var records = db.train.find();
 
@@ -46,7 +46,7 @@ sys     0m0.015s
 ```
 ---
 Ilosc tagow
-```
+```javascript
 var db = new Mongo().getDB('zadanie');
 var records = db.train.find();
 
@@ -70,7 +70,7 @@ sys     0m0.015s
 ```
 
 Ilosc unikalnych tagow
-```
+```javascript
 var db = new Mongo().getDB('zadanie');
 var records = db.train.find();
 
@@ -122,7 +122,7 @@ db.places.ensureIndex({"loc" : "2dsphere"})
 
 ### Zapytanie 1:
 Miasto wojewodzkie polozone najblizej Warszawy:
-```
+```javascript
 var Warszawa = db.places.findOne({ _id: "Warszawa" })
 db.places.find({loc: {$near: {$geometry: Warszawa.loc, $maxDistance: 600000}}}).skip(1).limit(1)
 ```
@@ -130,7 +130,7 @@ db.places.find({loc: {$near: {$geometry: Warszawa.loc, $maxDistance: 600000}}}).
 
 ### Zapytanie 2:
 Miasta wojewodzkie znajdujace sie w promieniu 2 stopni (ok. 222.4 km) od Lodzi:
-```
+```javascript
 var Lodz = db.places.findOne({ _id: "Lodz" })
 db.places.find({loc: {$geoWithin: {$center: [Lodz.loc.coordinates, 2]}}})
 ```
@@ -138,21 +138,21 @@ db.places.find({loc: {$geoWithin: {$center: [Lodz.loc.coordinates, 2]}}})
 
 ### Zapytanie 3:
 Miasta znajdujące się w czworokącie o wierzchołkach polozonych w najdalej wysunietych punktach Polski (S, E, N, W)
-```
+```javascript
 db.places.find({loc: {$geoWithin: {$geometry: polygon}}})
 ```
 [Wynik](https://github.com/lekiert/nosql/blob/master/zapytania/z3.json)
 
 ### Zapytanie 4:
 Miasta lezace na tym samym rownolezniku, co Gdansk:
-```
+```javascript
 db.places.find({loc: {$geoIntersects: {$geometry: {type: "LineString", coordinates: [[180,Gdansk.loc.coordinates[1]],[-180,Gdansk.loc.coordinates[1]]]}}}})
 ```
 [Wynik](https://github.com/lekiert/nosql/blob/master/zapytania/z4.json)
 
 ### Zapytanie 5:
 Miasta lezace na linii Gdansk-Opole:
-```
+```javascript
 var Gdansk = db.places.findOne({ _id: "Gdansk" })
 var Opole = db.places.findOne({ _id: "Opole" })
 db.places.find({loc: {$geoIntersects: {$geometry: {"type": "LineString", "coordinates": [Gdansk.loc.coordinates,Opole.loc.coordinates]}}}})
@@ -161,7 +161,7 @@ db.places.find({loc: {$geoIntersects: {$geometry: {"type": "LineString", "coordi
 
 ### Zapytanie 6:
 Miasta znajdujace sie w tzw. Polsce "B":
-```
+```javascript
 var polygon = {
   "type": "Polygon",
   "coordinates": [[
