@@ -1,0 +1,9 @@
+{ "_id" : "Gdansk", "loc" : { "type" : "Point", "coordinates" : [ 18.629379, 54.35403 ] } }
+{ "_id" : "Torun", "loc" : { "type" : "Point", "coordinates" : [ 18.613415, 53.018262 ] } }
+{ "_id" : "Poznan", "loc" : { "type" : "Point", "coordinates" : [ 16.926842, 52.408637 ] } }
+{ "_id" : "Gorzow Wielkopolski", "loc" : { "type" : "Point", "coordinates" : [ 15.240612, 52.732101 ] } }
+{ "_id" : "Kielce", "loc" : { "type" : "Point", "coordinates" : [ 20.630264, 50.875176 ] } }
+{ "_id" : "Lodz", "loc" : { "type" : "Point", "coordinates" : [ 19.45919, 51.764374 ] } }
+{ "_id" : "Warszawa", "loc" : { "type" : "Point", "coordinates" : [ 21.003284, 52.230921 ] } }
+{ "_id" : "Lublin", "loc" : { "type" : "Point", "coordinates" : [ 22.574501, 51.239929 ] } }
+{ "_id" : "Rzeszow", "loc" : { "type" : "Point", "coordinates" : [ 21.997719, 50.034582 ] } }

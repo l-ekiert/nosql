@@ -1,0 +1,17 @@
+{"_id":"Olsztyn",  loc:{"type":"Point","coordinates":[20.478344,53.776483]}}
+{"_id":"Gdansk", loc:{"type":"Point","coordinates":[18.629379,54.35403]}}
+{"_id":"Szczecin",  loc:{"type":"Point","coordinates":[14.551907,53.423619]}}
+{"_id":"Bialystok",loc:{"type":"Point","coordinates":[23.140125,53.134588]}}
+{"_id":"Torun",loc:{"type":"Point","coordinates":[18.613415,53.018262]}}
+{"_id":"Gorzow Wielkopolski",loc:{"type":"Point","coordinates":[15.240612,52.732101]}}
+{"_id":"Zielona Gora",loc:{"type":"Point","coordinates":[15.503426,51.939966]}}
+{"_id":"Wroclaw",loc:{"type":"Point","coordinates":[17.033272,51.108628]}}
+{"_id":"Katowice",loc:{"type":"Point","coordinates":[19.021797,50.256795]}}
+{"_id":"Opole",loc:{"type":"Point","coordinates":[17.925911,50.66898]}}
+{"_id":"Krakow",loc:{"type":"Point","coordinates":[19.94276,50.053357]}}
+{"_id":"Rzeszow",loc:{"type":"Point","coordinates":[21.997719,50.034582]}}
+{"_id":"Lublin",loc:{"type":"Point","coordinates":[22.574501,51.239929]}}
+{"_id":"Lodz",loc:{"type":"Point","coordinates":[19.45919,51.764374]}}
+{"_id":"Kielce",loc:{"type":"Point","coordinates":[20.630264,50.875176]}}
+{"_id":"Poznan",loc:{"type":"Point","coordinates":[16.926842,52.408637]}}
+{"_id":"Warszawa",loc:{"type":"Point","coordinates":[21.003284,52.230921]}}
